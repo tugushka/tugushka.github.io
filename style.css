@@ -1,0 +1,19 @@
+body {
+	background: grey;
+	max-width: 800px;
+	margin: 50px;
+	text-align: center;
+}
+
+.container{
+	max-width: 600px;
+	float : left;
+}
+
+#welcome{
+	margin-top: 10px;
+}
+
+#msg{
+	margin : 10px;
+}

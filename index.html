@@ -1,72 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Upd</title>
-	<script type="text/javascript">
-		var n, m, cnt, px, py;
-		var used = {};
-		function init(){
-			cnt = 0;
-			n = 4;
-			m = 4;
-			px = py = -1;
-			var start = Math.floor( Math.random()*n*m);
-			document.write("<table>\n");
-			for(var i = 0 ; i < n ; i++){
-				document.write("<tr>");
-				for(var j = 0 ; j < m ; j++){
-					var now = i * n + j;
-					var id = 'c' + now + '';
-					used[now] = 0;
-
-					//console.log( '<td><button type = "button" id = ' + id + ' onclick = update(' + id + ')>?</button></td>\n');
-					document.write( '<td><button type = "button" id = "' + id + '" onclick = update('+ i + ',' + j + ')>.</button></td>\n' );
-				}
-				document.write("</tr>\n");
-			}
-			document.write("</table>\n");
-
-			// console.log( 'c' + start );
-
-			update( Math.floor( start/n ) , start%m );
-		}
-
-		function update(x, y){
-			// console.log( typeof(x), typeof(y) );
-			console.log( x, y );
-			if( used[x*n+y] == true ) {
-				fail(); return;
-			}
-			if( px == -1 ) px = x, py = y;
-			else{
-				var dx = Math.abs( x-px ), dy = Math.abs( y-py );
-				console.log(dx, dy);
-				if( Math.min(dx, dy) != 1 || Math.max(dx, dy) != 2 ){
-					fail(); return;
-				}
-			}
-			px = x, py = y;
-			id = 'c'+(x*n+y);
-			// console.log( x, y, id + "\n");
-			startEL = document.getElementById( id );
-			cnt++;
-			startEL.innerHTML = cnt;
-			used[x*n+y] = 1;
-
-			tmp = document.querySelector("#error");
-			tmp.innerHTML = "Keep going!"
-		}
-
-		function fail(){
-			tmp = document.querySelector("#error");
-			tmp.innerHTML = "Wrong move.<br>";
-		}
-	</script>
+	<title>Knight's tour</title>
+	<script type="text/javascript" src = main.js ></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-	<p id = "error"></p>
-	<span id="board">
-		<script type="text/javascript">init();</script>
-	</span>
+	
+	<div id="welcome">
+		<h3>Welcome to the game of knight's tour</h1>
+
+		<p>Can you make a closed knight tour on a NxM chessboard?</p>
+
+		<input type="text" placeholder="height" id="n">
+		<input type="text" placeholder="width" id="m">
+		<input type="checkbox" id="random">random start</input>
+		<br>
+	</div>
+	<div>
+		<button type="button" onclick=reset() >Go!</button>
+	</div>
+
+	<div class="container" id="board"></div>
+	<div id = "msg"></div>
 </body>
 </html>
